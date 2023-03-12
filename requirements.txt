@@ -7,4 +7,5 @@ MarkupSafe
 Werkzeug
 Flask-SQLAlchemy
 SQLAlchemy
+psycopg2
 
