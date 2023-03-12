@@ -1,10 +1,10 @@
-click==7.1.2
+click
 Flask
-gunicorn==20.0.4
-itsdangerous==1.1.0
+gunicorn
+itsdangerous
 Jinja2
-MarkupSafe==1.1.1
-Werkzeug==2.2.0
-Flask-SQLAlchemy==3.0.3
+MarkupSafe
+Werkzeug
+Flask-SQLAlchemy
 SQLAlchemy
 
