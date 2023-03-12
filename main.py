@@ -33,7 +33,7 @@ def format_usu(USU):
         "senha" : USU.senha
     }
 
-@app.route('/')
+@app.route('/all')
 def getUSU():
     usus = USU.query.all()
     usus_list = []
@@ -50,6 +50,10 @@ def insereUSU():
     db.session.add(evento)
     db.session.commit()
     return format_usu(evento)
+
+@app.route('/')
+def index():
+    return jsonify({"Choo Choo": "Welcome to your Flask app 🚅 xo xo"})
 
 
 if __name__ == '__main__':
