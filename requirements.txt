@@ -8,4 +8,4 @@ Werkzeug
 Flask-SQLAlchemy
 SQLAlchemy
 psycopg2
-
+flask-cors
