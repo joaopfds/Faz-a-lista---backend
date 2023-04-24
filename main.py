@@ -50,9 +50,66 @@ def insereUSU():
     usuEmail = request.json['email']
     usuSenha = request.json['senha']
     evento = USU(usuNick, usuEmail, usuSenha)
-    db.session.add(evento)
-    db.session.commit()
+    #db.session.add(evento)
+    #db.session.commit()
     return format_usu(evento)
+
+class Itens(db.Model):
+
+    __tablename__='Itens'
+    id = db.Column(db.Integer, primary_key=True)
+    conteudo = db.Column(db.String)
+    listaid = db.Column(db.integer, foring_key=True)
+
+    def __repr__(self):
+        return f"Itens: {self.conteudo, self.listaid}"
+
+    def __init__(self, conteudo, listaid):
+        self.conteudo = conteudo
+        self.listaid = listaid
+
+def format_Itens(Itens):
+    return {
+        "conteudo": Itens.conteudo,
+        "listaid": Itens.listaid
+    }
+
+@app.route('/insereListaUsuNCad', methods = ['POST'])
+def insereItens():
+    listaItem = request.json['item']
+    Conteudo = ""
+    evento = Itens(Conteudo, listaItem)
+    #db.session.add(evento)
+    #db.session.commit()
+    return format_Itens(evento)
+
+
+
+
+class Lista(db.Model):
+
+    __tablename__='Itens'
+    id = db.Column(db.Integer, primary_key=True)
+    USUID = db.Column(db.String)
+    DESCRICAO = db.Column(db.String) 
+
+    def __repr__(self):
+        return f"ITENS: {self.DESCRICAO}"
+
+    def __init__(self, DESCRICAO):
+        self.DESCRICAO = DESCRICAO
+
+    def __init__(self, DESCRICAO, USUID):
+        self.DESCRICAO = DESCRICAO
+        self.USUID = USUID
+
+def format_Lista(lista):
+    return {
+        "DESCRICAO": lista.DESCRICAO,
+        "USUID": lista.USUID
+    }
+
+
 
 @app.route('/')
 def index():
