@@ -50,8 +50,8 @@ def insereUSU():
     usuEmail = request.json['email']
     usuSenha = request.json['senha']
     evento = USU(usuNick, usuEmail, usuSenha)
-    #db.session.add(evento)
-    #db.session.commit()
+    db.session.add(evento)
+    db.session.commit()
     return format_usu(evento)
 
 class Itens(db.Model):
@@ -59,7 +59,7 @@ class Itens(db.Model):
     __tablename__='Itens'
     id = db.Column(db.Integer, primary_key=True)
     conteudo = db.Column(db.String)
-    listaid = db.Column(db.integer, foring_key=True)
+    listaid = db.Column(db.Integer)
 
     def __repr__(self):
         return f"Itens: {self.conteudo, self.listaid}"
@@ -88,13 +88,13 @@ def insereItens():
 
 class Lista(db.Model):
 
-    __tablename__='Itens'
+    __tablename__='Lista'
     id = db.Column(db.Integer, primary_key=True)
-    USUID = db.Column(db.String)
+    USUID = db.Column(db.Integer)
     DESCRICAO = db.Column(db.String) 
 
     def __repr__(self):
-        return f"ITENS: {self.DESCRICAO}"
+        return f"LISTA: {self.DESCRICAO}"
 
     def __init__(self, DESCRICAO):
         self.DESCRICAO = DESCRICAO
