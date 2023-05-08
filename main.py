@@ -65,7 +65,7 @@ def fazLogin():
     for usu in usus:
         if usu.email == usuEmail and usu.senha == usuSenha :
             Res = format_usu(usu)
-    return {"Res": Res}
+    return {Res}
 
 class ITEM(db.Model):
 
