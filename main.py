@@ -58,7 +58,7 @@ def insereUSU():
 
 @app.route('/login')
 def fazLogin():
-    Res = False
+    Res = ''
     usuEmail = request.json['email']
     usuSenha = request.json['password']
     usus = USU.query.all()
