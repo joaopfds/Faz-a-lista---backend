@@ -1,12 +1,14 @@
-from flask import Flask, jsonify, render_template, request
+from flask import Flask, jsonify, render_template, request, logging
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import login_user, logout_user
 
 
 
 app = Flask(__name__)
-app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:b2HniV8IfDcjqLkMYmsO@containers-us-west-173.railway.app:6695/railway"
+app.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:m5FGONigT78417TQZdyS@containers-us-west-173.railway.app:6695/railway"
 app.config['JSON_AS_ASCII'] = False
 CORS(app)
 
@@ -14,7 +16,7 @@ db = SQLAlchemy(app)
 
 class USU(db.Model):
 
-    __tablename__='usu'
+    __tablename__='USU'
     id = db.Column(db.Integer, primary_key=True)
     nick = db.Column(db.String)
     email = db.Column(db.String)
@@ -36,7 +38,7 @@ def format_usu(USU):
         "senha" : USU.senha
     }
 
-@app.route('/all')
+@app.route('/user_all')
 def getUSU():
     usus = USU.query.all()
     usus_list = []
@@ -54,31 +56,50 @@ def insereUSU():
     db.session.commit()
     return format_usu(evento)
 
-class Itens(db.Model):
+@app.route('/login')
+def fazLogin():
+    Res = False
+    usuEmail = request.json['email']
+    usuSenha = request.json['senha']
+    usus = USU.query.all()
+    for usu in usus:
+        if usu.email == usuEmail and usu.senha == usuSenha :
+            Res = format_usu(usu)
+    return {"Res": Res}
 
-    __tablename__='Itens'
+class ITEM(db.Model):
+
+    __tablename__='ITENS'
     id = db.Column(db.Integer, primary_key=True)
     conteudo = db.Column(db.String)
-    listaid = db.Column(db.Integer)
+    lista_id = db.Column(db.Integer)
 
     def __repr__(self):
-        return f"Itens: {self.conteudo, self.listaid}"
+        return f"Itens: {self.conteudo, self.lista_id}"
 
-    def __init__(self, conteudo, listaid):
+    def __init__(self, conteudo, lista_id):
         self.conteudo = conteudo
-        self.listaid = listaid
+        self.lista_id = lista_id
 
 def format_Itens(Itens):
     return {
         "conteudo": Itens.conteudo,
-        "listaid": Itens.listaid
+        "listaid": Itens.lista_id
     }
+
+@app.route('/item_all')
+def getItem():
+    Itens = ITEM.query.all()
+    itens_list = []
+    for item in Itens:
+        itens_list.append(format_Itens(item))
+    return {"itens": itens_list}
 
 @app.route('/insereListaUsuNCad', methods = ['POST'])
 def insereItens():
     listaItem = request.json['item']
     Conteudo = ""
-    evento = Itens(Conteudo, listaItem)
+    evento = ITEM(Conteudo, listaItem)
     #db.session.add(evento)
     #db.session.commit()
     return format_Itens(evento)
@@ -88,26 +109,35 @@ def insereItens():
 
 class Lista(db.Model):
 
-    __tablename__='Lista'
+    __tablename__='LISTA'
     id = db.Column(db.Integer, primary_key=True)
-    USUID = db.Column(db.Integer)
-    DESCRICAO = db.Column(db.String) 
+    usu_id = db.Column(db.Integer)
+    descricao = db.Column(db.String) 
 
     def __repr__(self):
-        return f"LISTA: {self.DESCRICAO}"
+        return f"LISTA: {self.descricao}"
 
-    def __init__(self, DESCRICAO):
-        self.DESCRICAO = DESCRICAO
+    def __init__(self, descricao):
+        self.DESCRICAO = descricao
 
-    def __init__(self, DESCRICAO, USUID):
-        self.DESCRICAO = DESCRICAO
-        self.USUID = USUID
+    def __init__(self, descricao, usu_id):
+        self.descricao = descricao
+        self.usu_id = usu_id
 
 def format_Lista(lista):
     return {
-        "DESCRICAO": lista.DESCRICAO,
-        "USUID": lista.USUID
+        "DESCRICAO": lista.descricao,
+        "USUID": lista.usu_id
     }
+
+@app.route('/lista_all')
+def getLista():
+    listas = Lista.query.all()
+    lista_list = []
+    for lista in listas:
+        lista_list.append(format_Itens(lista))
+    return {"itens": lista_list}
+
 
 
 
