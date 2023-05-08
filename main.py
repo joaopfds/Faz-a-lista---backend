@@ -65,11 +65,10 @@ def fazLogin():
     evento = USU.query.all()
     for usu in evento:
         if usu.email == usuEmail and usu.senha == usuSenha :
-            return format_usu(usu)
+            return {"usu": format_usu(usu)}
     print('aqui', Res)
 
 class ITEM(db.Model):
-
     __tablename__='ITENS'
     id = db.Column(db.Integer, primary_key=True)
     conteudo = db.Column(db.String)
