@@ -61,11 +61,12 @@ def fazLogin():
     Res = ''
     usuEmail = request.json['email']
     usuSenha = request.json['password']
-    usus = USU.query.all()
-    for usu in usus:
+    print(usuEmail, usuSenha)
+    evento = USU.query.all()
+    for usu in evento:
         if usu.email == usuEmail and usu.senha == usuSenha :
-            Res = format_usu(usu)
-    return {"":Res}
+            return format_usu(usu)
+    print('aqui', Res)
 
 class ITEM(db.Model):
 
@@ -81,8 +82,12 @@ class ITEM(db.Model):
         self.conteudo = conteudo
         self.lista_id = lista_id
 
+    def __init__(self, conteudo):
+        self.conteudo = conteudo
+
 def format_Itens(Itens):
     return {
+        "id": Itens.id,
         "conteudo": Itens.conteudo,
         "listaid": Itens.lista_id
     }
@@ -97,14 +102,11 @@ def getItem():
 
 @app.route('/insereListaUsuNCad', methods = ['POST'])
 def insereItens():
-    listaItem = request.json['item']
-    Conteudo = ""
-    evento = ITEM(Conteudo, listaItem)
+    Conteudo = request.json['item']
+    evento = ITEM(Conteudo)
     #db.session.add(evento)
     #db.session.commit()
     return format_Itens(evento)
-
-
 
 
 class Lista(db.Model):
@@ -126,8 +128,9 @@ class Lista(db.Model):
 
 def format_Lista(lista):
     return {
-        "DESCRICAO": lista.descricao,
-        "USUID": lista.usu_id
+        "id": lista.id,
+        "descricao": lista.descricao,
+        "usu_id": lista.usu_id
     }
 
 @app.route('/lista_all')
@@ -135,7 +138,7 @@ def getLista():
     listas = Lista.query.all()
     lista_list = []
     for lista in listas:
-        lista_list.append(format_Itens(lista))
+        lista_list.append(format_Lista(lista))
     return {"itens": lista_list}
 
 
