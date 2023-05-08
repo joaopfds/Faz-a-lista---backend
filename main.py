@@ -60,7 +60,7 @@ def insereUSU():
 def fazLogin():
     Res = False
     usuEmail = request.json['email']
-    usuSenha = request.json['senha']
+    usuSenha = request.json['password']
     usus = USU.query.all()
     for usu in usus:
         if usu.email == usuEmail and usu.senha == usuSenha :
