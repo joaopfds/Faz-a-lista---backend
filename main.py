@@ -65,7 +65,9 @@ def fazLogin():
     evento = USU.query.all()
     for usu in evento:
         if usu.email == usuEmail and usu.senha == usuSenha :
-            print(format_usu(usu))
+            Res = format_usu(usu)
+            #login_user(usu)
+            print(Res)
             return {"usu": format_usu(usu)}
     print('aqui', Res)
 
