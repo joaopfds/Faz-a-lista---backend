@@ -56,8 +56,8 @@ def insereUSU():
     db.session.commit()
     return format_usu(evento)
 
-@app.route('/login', methods = ['POST'])
-def login():
+@app.route('/fazLogin', methods = ['POST'])
+def fazLogin():
     Res = 'fail'
     usuEmail = request.json['email']
     usuSenha = request.json['password']
