@@ -57,7 +57,7 @@ def insereUSU():
     return format_usu(evento)
 
 @app.route('/login', methods = ['POST'])
-def fazLogin():
+def login():
     Res = 'fail'
     usuEmail = request.json['email']
     usuSenha = request.json['password']
