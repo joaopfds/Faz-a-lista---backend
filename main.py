@@ -45,6 +45,7 @@ def getUSU():
     usus_list = []
     for usu in usus:
         usus_list.append(format_usu(usu))
+        print(usus_list)
     return {"usus": usus_list}
 
 @app.route('/insereusu', methods = ['POST'])
@@ -86,6 +87,7 @@ def format_USUCompleto(USUCompleto):
 @app.route('/fazLogin', methods = ['POST'])
 def fazLogin():
     print("aqui", request)
+    Res = []
     USUCompletoEmail = request.json['email']
     USUCompletoSenha = request.json['password']
     print(USUCompletoEmail, USUCompletoSenha)
@@ -93,7 +95,7 @@ def fazLogin():
     for USUCompleto in evento:
         if USUCompleto.email == USUCompletoEmail and USUCompleto.senha == USUCompletoSenha :
             evento = USUComp(USUCompleto.id, USUCompleto.nick, USUCompleto.email, USUCompleto.senha)
-            Res = format_USUCompleto(evento)
+            Res.append(format_USUCompleto(evento))
             #login_user(USUCompleto)
             print(Res)
             return Res
