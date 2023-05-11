@@ -17,6 +17,7 @@ db = SQLAlchemy(app)
 class USU(db.Model):
 
     __tablename__='USU'
+    __table_args__ = {'extend_existing': True}
     id = db.Column(db.Integer, primary_key=True)
     nick = db.Column(db.String)
     email = db.Column(db.String)
@@ -26,12 +27,6 @@ class USU(db.Model):
         return f"USU: {self.nick, self.email, self.senha}"
 
     def __init__(self, nick, email, senha):
-        self.nick = nick
-        self.email = email
-        self.senha = senha
-
-    def __init__(self, id, nick, email, senha):
-        self.id = id
         self.nick = nick
         self.email = email
         self.senha = senha
