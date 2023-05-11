@@ -173,7 +173,20 @@ def getLista():
     return {"itens": lista_list}
 
 
-
+@app.route('/lon', methods = ['POST'])
+def lon():
+    Res = []
+    USUCompletoEmail = request.json['email']
+    USUCompletoSenha = request.json['password']
+    print(USUCompletoEmail, USUCompletoSenha)
+    evento = USUComp.query.all()
+    for USUCompleto in evento:
+        if USUCompleto.email == USUCompletoEmail and USUCompleto.senha == USUCompletoSenha :
+            evento = USUComp(USUCompleto.id, USUCompleto.nick, USUCompleto.email, USUCompleto.senha)
+            Res.append(format_USUCompleto(evento))
+            #login_user(USUCompleto)
+            print(Res)
+    return Res
 
 @app.route('/')
 def index():
