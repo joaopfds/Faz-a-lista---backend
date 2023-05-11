@@ -92,11 +92,11 @@ def fazLogin():
     evento = USUComp.query.all()
     for USUCompleto in evento:
         if USUCompleto.email == USUCompletoEmail and USUCompleto.senha == USUCompletoSenha :
-            Res = format_USUCompleto(USUComp(USUCompleto.id, USUCompleto.nick, USUCompleto.email, USUCompleto.senha))
+            evento = USUComp(USUCompleto.id, USUCompleto.nick, USUCompleto.email, USUCompleto.senha)
+            Res = format_USUCompleto(evento)
             #login_user(USUCompleto)
             print(Res)
-            return {"USUCompleto": Res}
-    print('aqui', Res)
+            return Res
 
 class ITEM(db.Model):
     __tablename__='ITENS'
