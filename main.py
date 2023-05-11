@@ -84,9 +84,9 @@ def format_USUCompleto(USUCompleto):
         "senha" : USUCompleto.senha
     }
 
-@app.route('/fazLogin', methods = ['POST'])
+@app.route('/fazlogin', methods = ['POST'])
 def fazLogin():
-    print("aqui", request)
+    return print("aqui", request)
     Res = []
     USUCompletoEmail = request.json['email']
     USUCompletoSenha = request.json['password']
