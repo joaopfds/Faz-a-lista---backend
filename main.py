@@ -30,6 +30,12 @@ class USU(db.Model):
         self.email = email
         self.senha = senha
 
+    def __init__(self, id, nick, email, senha):
+        self.id = id
+        self.nick = nick
+        self.email = email
+        self.senha = senha
+
 def format_usu(USU):
     return {
         "nick": USU.nick,
@@ -56,19 +62,45 @@ def insereUSU():
     db.session.commit()
     return format_usu(evento)
 
+class USUComp(db.Model):
+
+    __tablename__='USU'
+    __table_args__ = {'extend_existing': True}
+    id = db.Column(db.Integer, primary_key=True)
+    nick = db.Column(db.String)
+    email = db.Column(db.String)
+    senha = db.Column(db.String)
+
+    def __repr__(self):
+        return f"USU: {self.id, self.nick, self.email, self.senha}"
+
+    def __init__(self, id, nick, email, senha):
+        self.id = id
+        self.nick = nick
+        self.email = email
+        self.senha = senha
+
+def format_USUCompleto(USUCompleto):
+    return {
+        "nick": USUCompleto.nick,
+        "id" : USUCompleto.id,
+        "email": USUCompleto.email,
+        "senha" : USUCompleto.senha
+    }
+
 @app.route('/fazLogin', methods = ['POST'])
 def fazLogin():
     Res = 'fail'
-    usuEmail = request.json['email']
-    usuSenha = request.json['password']
-    print(usuEmail, usuSenha)
-    evento = USU.query.all()
-    for usu in evento:
-        if usu.email == usuEmail and usu.senha == usuSenha :
-            Res = format_usu(usu)
-            #login_user(usu)
+    USUCompletoEmail = request.json['email']
+    USUCompletoSenha = request.json['password']
+    print(USUCompletoEmail, USUCompletoSenha)
+    evento = USUComp.query.all()
+    for USUCompleto in evento:
+        if USUCompleto.email == USUCompletoEmail and USUCompleto.senha == USUCompletoSenha :
+            Res = format_USUCompleto(USUComp(USUCompleto.id, USUCompleto.nick, USUCompleto.email, USUCompleto.senha))
+            #login_user(USUCompleto)
             print(Res)
-            return {"usu": format_usu(usu)}
+            return {"USUCompleto": Res}
     print('aqui', Res)
 
 class ITEM(db.Model):
