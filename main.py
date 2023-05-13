@@ -87,7 +87,13 @@ def format_USUCompleto(USUCompleto):
 @app.route('/ckusu')
 def ckUSU():
     usuEmail = request.json.get('email')
-    return jsonify({usuEmail : "Welcome to your Flask app 🚅 xo xo"})
+    usuSenha = request.json.get('senha')
+    usuarios = USU.query.all()
+    usuList = []
+    for usua in usuarios:
+        usuList.append(format_usu(usua))
+
+    return {"usus": usuList}
 
 class ITEM(db.Model):
     __tablename__='ITENS'
