@@ -58,6 +58,17 @@ def insereUSU():
     db.session.commit()
     return format_usu(evento)
 
+@app.route('/ckusu', methods = ["POST"])
+def ckUSU():
+    usuEmail = request.json.get('email')
+    usuSenha = request.json.get('senha')
+    usuarios = USU.query.all()
+    usuList = []
+    for usua in usuarios:
+        print(usuSenha)
+        usuList.append(format_usu(usua))
+    return {"usus": usuList}
+
 class USUComp(db.Model):
 
     __tablename__='USU'
@@ -83,17 +94,6 @@ def format_USUCompleto(USUCompleto):
         "email": USUCompleto.email,
         "senha" : USUCompleto.senha
     }
-        
-@app.route('/ckusu', methods = ["POST"])
-def ckUSU():
-    usuEmail = request.json.get('email')
-    usuSenha = request.json.get('senha')
-    usuarios = USU.query.all()
-    usuList = []
-    for usua in usuarios:
-        print(usuSenha)
-        usuList.append(format_usu(usua))
-    return {"usus": usuList}
 
 class ITEM(db.Model):
     __tablename__='ITENS'
