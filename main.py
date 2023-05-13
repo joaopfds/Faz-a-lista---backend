@@ -108,6 +108,7 @@ def ckUSU():
     for usuario in usuLista:
         if usuEmail == usuario.email:
             return format_USUCompleto(usuario)
+    return jsonify("")
 
 class ITEM(db.Model):
     __tablename__='ITENS'
