@@ -86,13 +86,11 @@ def format_USUCompleto(USUCompleto):
         
 @app.route('/ckusu', methods = ['POST'])
 def ckUSU():
-    print("Aqui")
-    usus = USU.query.all()
-    usus_list = []
-    for usu in usus:
-        usus_list.append(format_usu(usu))
-        print(usus_list)
-    return {"usus": usus_list}
+    usuNick = 'teste'
+    usuEmail = request.json['email']
+    usuSenha = request.json['senha']
+    evento = USU(usuNick, usuEmail, usuSenha)
+    return format_usu(evento)
 
 class ITEM(db.Model):
     __tablename__='ITENS'
