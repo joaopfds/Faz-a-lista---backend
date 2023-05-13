@@ -91,6 +91,7 @@ def ckUSU():
     usuarios = USU.query.all()
     usuList = []
     for usua in usuarios:
+        print(usuSenha)
         usuList.append(format_usu(usua))
     return {"usus": usuList}
 
