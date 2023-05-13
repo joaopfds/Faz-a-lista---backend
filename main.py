@@ -84,7 +84,7 @@ def format_USUCompleto(USUCompleto):
         "senha" : USUCompleto.senha
     }
         
-@app.route('/ckusu')
+@app.route('/ckusu', methods = ["POST"])
 def ckUSU():
     usuEmail = request.json.get('email')
     usuSenha = request.json.get('senha')
@@ -92,7 +92,6 @@ def ckUSU():
     usuList = []
     for usua in usuarios:
         usuList.append(format_usu(usua))
-
     return {"usus": usuList}
 
 class ITEM(db.Model):
