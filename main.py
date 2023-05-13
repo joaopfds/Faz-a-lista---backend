@@ -99,6 +99,15 @@ def fazLogin():
             #login_user(USUCompleto)
             print(Res)
             return Res
+        
+@app.route('/ckusu', methods = ['POST'])
+def ckUSU():
+    usuEmail = request.json['email']
+    usuSenha = request.json['senha']
+    usuLista = USUComp.query.all()
+    for usuario in usuLista:
+        if usuEmail == usuario.email:
+            return format_USUCompleto(usuario)
 
 class ITEM(db.Model):
     __tablename__='ITENS'
