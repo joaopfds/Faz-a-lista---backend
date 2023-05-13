@@ -102,6 +102,7 @@ def fazLogin():
         
 @app.route('/ckusu', methods = ['POST'])
 def ckUSU():
+    print("Aqui")
     usuEmail = request.json['email']
     usuSenha = request.json['senha']
     usus = USU.query.all()
