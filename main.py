@@ -58,14 +58,14 @@ def insereUSU():
     db.session.commit()
     return format_usu(evento)
 
-@app.route('/ckusu', methods = ["POST"])
+@app.route('/ckusu', methods = ['POST'])
 def ckUSU():
     usuEmail = request.json.get('email')
     usuSenha = request.json.get('senha')
     usuarios = USU.query.all()
     usuList = []
     for usua in usuarios:
-        print(usuSenha)
+        print(usua)
         usuList.append(format_usu(usua))
     return {"usus": usuList}
 
