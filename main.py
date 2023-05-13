@@ -31,20 +31,20 @@ class USU(db.Model):
         self.email = email
         self.senha = senha
 
-def format_usu(USU):
-    return {
-        "nick": USU.nick,
-        "id" : USU.id,
-        "email": USU.email,
-        "senha" : USU.senha
-    }
+    def format_usu(USU):
+        return {
+            "nick": USU.nick,
+            "id" : USU.id,
+            "email": USU.email,
+            "senha" : USU.senha
+        }
 
 @app.route('/user_all')
 def getUSU():
     usus = USU.query.all()
     usus_list = []
     for usu in usus:
-        usus_list.append(format_usu(usu))
+        usus_list.append(USU.format_usu(usu))
         print(usus_list)
     return {"usus": usus_list}
 
@@ -56,7 +56,7 @@ def insereUSU():
     evento = USU(usuNick, usuEmail, usuSenha)
     db.session.add(evento)
     db.session.commit()
-    return format_usu(evento)
+    return USU.format_usu(evento)
 
 @app.route('/ckusu', methods = ['POST'])
 def ckUSU():
@@ -66,7 +66,7 @@ def ckUSU():
     usuList = []
     for usua in usuarios:
         print(usua)
-        usuList.append(format_usu(usua))
+        usuList.append(USU.format_usu(usua))
     return {"usus": usuList}
 
 class USUComp(db.Model):
