@@ -104,11 +104,12 @@ def fazLogin():
 def ckUSU():
     usuEmail = request.json['email']
     usuSenha = request.json['senha']
-    usuLista = USUComp.query.all()
-    for usuario in usuLista:
-        if usuEmail == usuario.email:
-            return format_USUCompleto(usuario)
-    return jsonify("")
+    usus = USU.query.all()
+    usus_list = []
+    for usu in usus:
+        usus_list.append(format_usu(usu))
+        print(usus_list)
+    return {"usus": usus_list}
 
 class ITEM(db.Model):
     __tablename__='ITENS'
