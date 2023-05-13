@@ -58,7 +58,7 @@ def insereUSU():
     db.session.commit()
     return USU.format_usu(evento)
 
-@app.route('/ckusu', methods = ['POST'])
+@app.route('/ckusu', methods = ['POST', 'GET', 'HEAD'])
 def ckUSU():
     usuEmail = request.json.get('email')
     usuSenha = request.json.get('senha')
