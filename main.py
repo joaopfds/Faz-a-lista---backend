@@ -86,11 +86,7 @@ def format_USUCompleto(USUCompleto):
         
 @app.route('/ckusu', methods = ['POST'])
 def ckUSU():
-    usuNick = 'teste'
-    usuEmail = request.json['email']
-    usuSenha = request.json['senha']
-    evento = USU(usuNick, usuEmail, usuSenha)
-    return format_usu(evento)
+    return jsonify({"Choo Choo": "Welcome to your Flask app 🚅 xo xo"})
 
 class ITEM(db.Model):
     __tablename__='ITENS'
