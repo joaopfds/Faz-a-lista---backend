@@ -60,7 +60,7 @@ def insereUSU():
     return{ USU.format_usu(evento)}
 
 
-@app.route('/ckusu', methods = ['POST'])
+@app.route('/seek_usu', methods = ['POST'])
 def ckUSU():
     data = request
     print(data.json)
