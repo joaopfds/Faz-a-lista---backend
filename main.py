@@ -59,7 +59,7 @@ def insereUSU():
     return{ USU.format_usu(evento)}
 
 
-@app.route('/ckusu')
+@app.route('/ckusu', methods = ['POST'])
 def ckUSU():
     usuEmail = request.json['email']
     usuSenha = request.json['senha']
