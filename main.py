@@ -48,12 +48,19 @@ def getUSU():
         print(usus_list)
     return {"usus": usus_list}
 
+@app.route('/insereusu', methods = ['POST'])
+def insereUSU():
+    usuNick = request.json['nick']
+    usuEmail = request.json['email']
+    usuSenha = request.json['senha']
+    evento = USU(usuNick, usuEmail, usuSenha)
+    db.session.add(evento)
+    db.session.commit()
+    return{ USU.format_usu(evento)}
 
 
-@app.route('/ckusu', methods = ['POST', 'GET', 'HEAD'])
+@app.route('/ckusu')
 def ckUSU():
-    usuEmail = request.json.get('email')
-    usuSenha = request.json.get('senha')
     usuarios = USU.query.all()
     usuList = []
     for usua in usuarios:
