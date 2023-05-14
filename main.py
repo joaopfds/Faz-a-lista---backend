@@ -39,7 +39,7 @@ class USU(db.Model):
             "senha" : USU.senha
         }
 
-@app.route('/user_all')
+@app.route('/user_all', methods = ['POST'])
 def getUSU():
     usuEmail = request.json['email']
     usuSenha = request.json['senha']
