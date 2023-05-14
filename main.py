@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, render_template, request, Request, request, logging
 import os
+from flask import Flask, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -39,10 +40,8 @@ class USU(db.Model):
             "senha" : USU.senha
         }
 
-@app.route('/user_all', methods = ['POST'])
+@app.route('/user_all')
 def getUSU():
-    usuEmail = request.json['email']
-    usuSenha = request.json['senha']
     usus = USU.query.all()
     usus_list = []
     for usu in usus:
@@ -63,8 +62,8 @@ def insereUSU():
 
 @app.route('/ckusu', methods = ['POST'])
 def ckUSU(request):
-    usuEmail = request.json['email']
-    usuSenha = request.json['senha']
+    usuEmail = Request.json['email']
+    usuSenha = Request.json['senha']
     usuarios = USU.query.all()
     usuList = []
     for usua in usuarios:
