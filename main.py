@@ -49,6 +49,7 @@ def getUSU():
         print(usus_list)
     return {"usus": usus_list}
 
+
 @app.route('/ckusu', methods = ['POST'])
 def ckUSU():
     usuEmail = request.json['email']
