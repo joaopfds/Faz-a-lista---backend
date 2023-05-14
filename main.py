@@ -41,6 +41,8 @@ class USU(db.Model):
 
 @app.route('/user_all')
 def getUSU():
+    usuEmail = request.json['email']
+    usuSenha = request.json['senha']
     usus = USU.query.all()
     usus_list = []
     for usu in usus:
