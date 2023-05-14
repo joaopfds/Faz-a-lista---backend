@@ -61,6 +61,8 @@ def insereUSU():
 
 @app.route('/ckusu')
 def ckUSU():
+    usuEmail = request.json['email']
+    usuSenha = request.json['senha']
     usuarios = USU.query.all()
     usuList = []
     for usua in usuarios:
