@@ -70,8 +70,9 @@ def ckUSU():
     usuList = []
     for usua in usuarios:
         print(usua)
-        usuList.append(USU.format_usu(usua))
-    return {"usus": usuList}
+        if usua.email == usuEmail and usua.senha == usuSenha: 
+            usuList.append(USU.format_usu(usua))
+    return {usuList}
 
 class USUComp(db.Model):
 
