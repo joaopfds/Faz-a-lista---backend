@@ -1,4 +1,5 @@
 from flask import Flask, jsonify, render_template, request, Request, request, logging
+from flask import request
 import os
 from flask_sqlalchemy import SQLAlchemy
 from flask_cors import CORS
@@ -47,17 +48,6 @@ def getUSU():
         usus_list.append(USU.format_usu(usu))
         print(usus_list)
     return {"usus": usus_list}
-
-@app.route('/insereusu', methods = ['POST'])
-def insereUSU():
-    usuNick = request.json['nick']
-    usuEmail = request.json['email']
-    usuSenha = request.json['senha']
-    evento = USU(usuNick, usuEmail, usuSenha)
-    db.session.add(evento)
-    db.session.commit()
-    return{ USU.format_usu(evento)}
-
 
 @app.route('/ckusu', methods = ['POST'])
 def ckUSU():
