@@ -57,7 +57,7 @@ def insereUSU():
     evento = USU(usuNick, usuEmail, usuSenha)
     db.session.add(evento)
     db.session.commit()
-    return{ USU.format_usu(evento)}
+    return{'': USU.format_usu(evento)}
 
 
 @app.route('/seek_usu', methods = ['POST'])
