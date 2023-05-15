@@ -72,7 +72,7 @@ def ckUSU():
         print(usua)
         if usua.email == usuEmail and usua.senha == usuSenha: 
             usuList.append(USU.format_usu(usua))
-    return {"":usuList}
+    return {"usu":usuList}
 
 class USUComp(db.Model):
 
