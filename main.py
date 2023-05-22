@@ -170,7 +170,7 @@ def getLista():
     lista_list = []
     for lista in listas:
         lista_list.append(format_Lista(lista))
-    return {"itens": lista_list}
+    return {"lista": lista_list}
 
 
 @app.route('/lon', methods = ['POST'])
