@@ -186,7 +186,7 @@ def lon():
             Res.append(format_USUCompleto(evento))
             #login_user(USUCompleto)
             print(Res)
-    return Res
+            return Res
 
 @app.route('/')
 def index():
